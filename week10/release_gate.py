@@ -87,7 +87,12 @@ print("release gate up — waiting for ImagePushed events. Ctrl-C to stop.")
 for msg in consumer:
     event = msg.value
     print(f"[event] {event}")
-
+    print(f"Image: {msg.value('image')} Version: {msg.value('version')}")
+    deploy(msg.value('version'))
+    test = run_tests()
+    if test
+        promote(msg.value('version'))
+    teardown(msg.value('version'))
     # TODO: read the version from the event.
     # TODO: deploy(version), then run_tests(). If it passes, promote(version).
     #       If it fails, do nothing.
